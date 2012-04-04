@@ -1,28 +1,26 @@
-%global namedreltag .20120309gitc251f89
+%global namedreltag .Final
 %global namedversion %{version}%{?namedreltag}
 
 Name:          jboss-jms-1.1-api
 Version:       1.0.1
-Release:       0.1%{namedreltag}%{?dist}
+Release:       1%{?dist}
 Summary:       JBoss JMS API 1.1 Spec
 Group:         Development/Libraries
 License:       CDDL or GPLv2 with exceptions
 URL:           http://www.jboss.org
 
 # git clone git://github.com/jboss/jboss-jms-api_spec.git jboss-jms-1.1-api
-# cd jboss-jms-1.1-api/ && git archive --format=tar --prefix=jboss-jms-1.1-api/ c251f89a62aa7f241367f297d4c8a7c630ab92aa | xz > jboss-jms-1.1-api-1.0.1.20120309gitc251f89.tar.xz
+# cd jboss-jms-1.1-api/ && git archive --format=tar --prefix=jboss-jms-1.1-api/ jboss-jms-api_1.1_spec-1.0.1.Final | xz > jboss-jms-1.1-api-1.0.1.Final.tar.xz
 Source0:       %{name}-%{namedversion}.tar.xz
 
 BuildRequires: java-devel
 BuildRequires: jpackage-utils
-BuildRequires: jboss-specs-parent
 BuildRequires: maven
 BuildRequires: maven-compiler-plugin
 BuildRequires: maven-install-plugin
 BuildRequires: maven-jar-plugin
 BuildRequires: maven-javadoc-plugin
 
-Requires:      jboss-specs-parent
 Requires:      java
 Requires:      jpackage-utils
 
@@ -51,7 +49,7 @@ install -d -m 755 $RPM_BUILD_ROOT%{_mavenpomdir}
 install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 # JAR
-install -pm 644 target/jboss-jms-api_1.1_spec-%{version}-SNAPSHOT.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
+install -pm 644 target/jboss-jms-api_1.1_spec-%{namedversion}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
 
 # POM
 install -pm 644 pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{name}.pom
@@ -73,6 +71,10 @@ cp -rp target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 %doc LICENSE README
 
 %changelog
+* Wed Apr 04 2012 Marek Goldmann <mgoldman@redhat.com> 1.0.1-1
+- Upstream release 1.0.1.Final
+- Fixed R and BR
+
 * Fri Mar 09 2012 Marek Goldmann <mgoldman@redhat.com> 1.0.1-0.1.20120309gitc251f89
 - Packaging after license cleanup upstream
 
