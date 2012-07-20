@@ -3,7 +3,7 @@
 
 Name:          jboss-jms-1.1-api
 Version:       1.0.1
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       JBoss JMS API 1.1 Spec
 Group:         Development/Libraries
 License:       CDDL or GPLv2 with exceptions
@@ -20,6 +20,12 @@ BuildRequires: maven-compiler-plugin
 BuildRequires: maven-install-plugin
 BuildRequires: maven-jar-plugin
 BuildRequires: maven-javadoc-plugin
+BuildRequires: maven-enforcer-plugin
+BuildRequires: maven-checkstyle-plugin
+BuildRequires: maven-plugin-cobertura
+BuildRequires: maven-dependency-plugin
+BuildRequires: maven-ear-plugin
+BuildRequires: maven-eclipse-plugin
 
 Requires:      java
 Requires:      jpackage-utils
@@ -71,6 +77,9 @@ cp -rp target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 %doc LICENSE README
 
 %changelog
+* Fri Jul 20 2012 Marek Goldmann <mgoldman@redhat.com> - 1.0.1-3
+- Fixed BR
+
 * Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
