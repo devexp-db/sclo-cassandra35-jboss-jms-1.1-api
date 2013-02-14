@@ -3,7 +3,7 @@
 
 Name:          jboss-jms-1.1-api
 Version:       1.0.1
-Release:       4%{?dist}
+Release:       5%{?dist}
 Summary:       JBoss JMS API 1.1 Spec
 Group:         Development/Libraries
 License:       CDDL or GPLv2 with exceptions
@@ -77,6 +77,9 @@ cp -rp target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 %doc LICENSE README
 
 %changelog
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.1-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Wed Feb 06 2013 Java SIG <java-devel@lists.fedoraproject.org> - 1.0.1-4
 - Update for https://fedoraproject.org/wiki/Fedora_19_Maven_Rebuild
 - Replace maven BuildRequires with maven-local
