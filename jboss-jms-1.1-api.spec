@@ -3,7 +3,7 @@
 
 Name:          jboss-jms-1.1-api
 Version:       1.0.1
-Release:       11%{?dist}
+Release:       12%{?dist}
 Summary:       JBoss JMS API 1.1 Spec
 License:       CDDL or GPLv2 with exceptions
 URL:           http://www.jboss.org
@@ -46,6 +46,9 @@ This package contains the API documentation for %{name}.
 %license LICENSE
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.1-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Wed Jul 29 2015 gil cattaneo <puntogil@libero.it> 1.0.1-11
 - fix FTBFS rhbz#1239594
 - fix BR list and use BRs mvn()-like
