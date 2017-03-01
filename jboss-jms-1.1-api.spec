@@ -1,42 +1,51 @@
+%{?scl:%scl_package jboss-jms-1.1-api}
+%{!?scl:%global pkg_name %{name}}
+
 %global namedreltag .Final
 %global namedversion %{version}%{?namedreltag}
 
-Name:          jboss-jms-1.1-api
-Version:       1.0.1
-Release:       14%{?dist}
-Summary:       JBoss JMS API 1.1 Spec
-License:       CDDL or GPLv2 with exceptions
-URL:           http://www.jboss.org
+Name:		%{?scl_prefix}jboss-jms-1.1-api
+Version:	1.0.1
+Release:	15%{?dist}
+Summary:	JBoss JMS API 1.1 Spec
+License:	CDDL or GPLv2 with exceptions
+URL:		http://www.jboss.org
 
 # git clone git://github.com/jboss/jboss-jms-api_spec.git jboss-jms-1.1-api
 # cd jboss-jms-1.1-api/ && git archive --format=tar --prefix=jboss-jms-1.1-api/ jboss-jms-api_1.1_spec-1.0.1.Final | xz > jboss-jms-1.1-api-1.0.1.Final.tar.xz
-Source0:       %{name}-%{namedversion}.tar.xz
+Source0:	%{pkg_name}-%{namedversion}.tar.xz
 
-BuildRequires: maven-local
-BuildRequires: mvn(org.apache.felix:maven-bundle-plugin)
-BuildRequires: mvn(org.jboss:jboss-parent:pom:)
-
-BuildArch:     noarch
+BuildRequires:	%{?scl_prefix_maven}maven-local
+BuildRequires:	%{?scl_prefix_maven}maven-plugin-bundle
+BuildRequires:	%{?scl_prefix_maven}jboss-parent
+%{?scl:Requires: %scl_runtime}
+BuildArch:	noarch
 
 %description
 The Java Messaging Service 1.1 API classes
 
 %package javadoc
-Summary:          Javadoc for %{name}
+Summary:	Javadoc for %{name}
 
 %description javadoc
 This package contains the API documentation for %{name}.
 
 %prep
-%setup -q -n jboss-jms-1.1-api
+%setup -q -n %{pkg_name}
 # Unneeded plugin
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 %pom_remove_plugin :maven-source-plugin
+%{?scl:EOF}
 
 %build
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 %mvn_build
+%{?scl:EOF}
 
 %install
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 %mvn_install
+%{?scl:EOF}
 
 %files -f .mfiles
 %doc README
@@ -47,6 +56,9 @@ This package contains the API documentation for %{name}.
 %license LICENSE
 
 %changelog
+* Wed Mar 01 2017 Tomas Repik <trepik@redhat.com> - 1.0.1-15
+- scl conversion
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.1-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
